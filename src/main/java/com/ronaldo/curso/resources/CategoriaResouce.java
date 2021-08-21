@@ -3,11 +3,15 @@ package com.ronaldo.curso.resources;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ronaldo.curso.domain.Categoria;
+import com.ronaldo.curso.services.CategoriaService;
 
 /**
  * Classe para fazer o Controller da api
@@ -16,16 +20,16 @@ import com.ronaldo.curso.domain.Categoria;
 @RestController
 @RequestMapping(value = "/categorias")
 public class CategoriaResouce {
-
-	@GetMapping
-	public List<Categoria> listar() {
-		Categoria cat1 = new Categoria(1,"informática");
-		Categoria cat2 = new Categoria(1,"informática");
-
-		List<Categoria> lista = new ArrayList<>();
-		lista.add(cat1);
-		lista.add(cat2);
+	/**
+	 * Lembrar de sempre instanciar objetos Service
+	 */
+	@Autowired
+	private CategoriaService categoriaService;
+	
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<?> find(@PathVariable Integer id) {
+		Categoria categoria = categoriaService.buscar(id);
 		
-		return lista;
+		return ResponseEntity.ok().body(categoria);
 	}
 }
