@@ -13,15 +13,15 @@ import com.ronaldo.curso.services.exception.ObjectNotFoundException;
 public class CategoriaService {
 
 	@Autowired
-	private CategoriaRepository categoriaRepository;
+	private CategoriaRepository repo;
 	
 	public Categoria buscar(Integer id) {
 		/**
 		 * Atualização do JPA para o java 8+
 		 * O Optiona retornal o Objeto ou nulo que deve ser tratado
 		 */
-		Optional<Categoria> categoria = categoriaRepository.findById(id);
-		return categoria.orElseThrow(() -> new ObjectNotFoundException(
+		Optional<Categoria> obj = repo.findById(id);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
 	}
 }
