@@ -15,7 +15,7 @@ public class CategoriaService {
 	@Autowired
 	private CategoriaRepository repo;
 	
-	public Categoria buscar(Integer id) {
+	public Categoria find(Integer id) {
 		/**
 		 * Atualização do JPA para o java 8+
 		 * O Optiona retornal o Objeto ou nulo que deve ser tratado
@@ -28,6 +28,11 @@ public class CategoriaService {
 	public Categoria insert(Categoria obj) {
 		//se não tem ID no objeto o JPA faz uma inserção nova
 		obj.setId(null);
+		return repo.save(obj);
+	}
+	
+	public Categoria update(Categoria obj) {
+		find(obj.getId());
 		return repo.save(obj);
 	}
 }

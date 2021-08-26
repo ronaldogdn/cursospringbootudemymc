@@ -15,7 +15,7 @@ public class PedidoService {
 	@Autowired
 	private PedidoRepository repo;
 	
-	public Pedido buscar(Integer id) {
+	public Pedido find(Integer id) {
 		/**
 		 * Atualização do JPA para o java 8+
 		 * O Optiona retornal o Objeto ou nulo que deve ser tratado
