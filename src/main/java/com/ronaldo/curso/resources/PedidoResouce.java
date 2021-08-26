@@ -7,25 +7,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ronaldo.curso.domain.Cliente;
-import com.ronaldo.curso.services.ClienteService;
+import com.ronaldo.curso.domain.Pedido;
+import com.ronaldo.curso.services.PedidoService;
 
 /**
  * Classe para fazer o Controller da api
  * @author ronaldo
  */
 @RestController
-@RequestMapping(value = "/clientes")
-public class ClienteResouce {
+@RequestMapping(value = "/pedidos")
+public class PedidoResouce {
 	/**
 	 * Lembrar de sempre instanciar objetos Service
 	 */
 	@Autowired
-	private ClienteService service;
+	private PedidoService service;
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<?> find(@PathVariable Integer id) {
-		Cliente categoria = service.buscar(id);
+		Pedido categoria = service.buscar(id);
 		
 		return ResponseEntity.ok().body(categoria);
 	}

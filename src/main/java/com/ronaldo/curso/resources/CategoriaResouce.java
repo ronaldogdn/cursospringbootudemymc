@@ -21,11 +21,11 @@ public class CategoriaResouce {
 	 * Lembrar de sempre instanciar objetos Service
 	 */
 	@Autowired
-	private CategoriaService categoriaService;
+	private CategoriaService service;
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<?> find(@PathVariable Integer id) {
-		Categoria categoria = categoriaService.buscar(id);
+		Categoria categoria = service.buscar(id);
 		
 		return ResponseEntity.ok().body(categoria);
 	}
