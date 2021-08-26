@@ -24,4 +24,10 @@ public class CategoriaService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
 	}
+	
+	public Categoria insert(Categoria obj) {
+		//se não tem ID no objeto o JPA faz uma inserção nova
+		obj.setId(null);
+		return repo.save(obj);
+	}
 }
