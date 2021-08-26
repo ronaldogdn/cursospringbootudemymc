@@ -8,26 +8,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.ronaldo.curso.domain.Categoria;
-import com.ronaldo.curso.domain.Cidade;
-import com.ronaldo.curso.domain.Cliente;
-import com.ronaldo.curso.domain.Endereco;
-import com.ronaldo.curso.domain.Estado;
-import com.ronaldo.curso.domain.Pagamento;
-import com.ronaldo.curso.domain.PagamentoComBoleto;
-import com.ronaldo.curso.domain.PagamentoComCartao;
-import com.ronaldo.curso.domain.Pedido;
-import com.ronaldo.curso.domain.Produto;
-import com.ronaldo.curso.domain.enums.EstadoPagamento;
-import com.ronaldo.curso.domain.enums.TipoCliente;
-import com.ronaldo.curso.repositories.CategoriaRepository;
-import com.ronaldo.curso.repositories.CidadeRepository;
-import com.ronaldo.curso.repositories.ClienteRepository;
-import com.ronaldo.curso.repositories.EnderecoRepository;
-import com.ronaldo.curso.repositories.EstadoRepository;
-import com.ronaldo.curso.repositories.PagamentoRepository;
-import com.ronaldo.curso.repositories.PedidoRepository;
-import com.ronaldo.curso.repositories.ProdutoRepository;
+import com.ronaldo.curso.domain.*;
+import com.ronaldo.curso.domain.enums.*;
+import com.ronaldo.curso.repositories.*;
 
 @SpringBootApplication
 public class CursoSpringBootUdemyApplication implements CommandLineRunner{
@@ -48,7 +31,8 @@ public class CursoSpringBootUdemyApplication implements CommandLineRunner{
 	private PagamentoRepository pagamentoRepository;
 	@Autowired
 	private PedidoRepository pedidoRepository;
-	
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository ;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(CursoSpringBootUdemyApplication.class, args);
@@ -113,7 +97,20 @@ public class CursoSpringBootUdemyApplication implements CommandLineRunner{
 		cli1.getPedidos().addAll(Arrays.asList(pedido1,pedido2));
 		
 		pedidoRepository.saveAll(Arrays.asList(pedido1,pedido2));
+		pagamentoRepository.saveAll(Arrays.asList(pgto1,pgto2));
+		
+		ItemPedido ip1 = new ItemPedido(pedido1, p1, 0.00, 1, 2000.00);
+		ItemPedido ip2 = new ItemPedido(pedido1, p3, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(pedido2, p2, 100.00, 1, 80.00);
+		
+		pedido1.getItens().addAll(Arrays.asList(ip1,ip2));
+		pedido1.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+		
+		itemPedidoRepository.saveAll(Arrays.asList(ip1,ip2,ip3));
 		
 	}
-
 }
