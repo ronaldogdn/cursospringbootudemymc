@@ -9,18 +9,22 @@ public class StandartError implements Serializable{
 	private Integer status;
 	private String msg;
 	private Long TimeStamp;
+	
 	public StandartError(Integer status, String msg, Long timeStamp) {
 		super();
 		this.status = status;
 		this.msg = msg;
 		TimeStamp = timeStamp;
 	}
+	
 	public Integer getStatus() {
 		return status;
 	}
+	
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
+	
 	public String getMsg() {
 		return msg;
 	}
