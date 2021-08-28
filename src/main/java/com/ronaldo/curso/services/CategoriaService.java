@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.ronaldo.curso.domain.Categoria;
+import com.ronaldo.curso.dto.CategoriaDTO;
 import com.ronaldo.curso.repositories.CategoriaRepository;
 import com.ronaldo.curso.services.exception.DataIntegrityException;
 import com.ronaldo.curso.services.exception.ObjectNotFoundException;
@@ -78,8 +79,12 @@ public class CategoriaService {
 			//para spring versão 2 ou superior
 			PageRequest pageRequest = PageRequest.of(page,linesPerPage, Direction.valueOf(direction),orderBy);
 			return repo.findAll(pageRequest);
-		} catch (DataIntegrityViolationException e) {
+		} catch (Exception e) {
 			throw new DataIntegrityException("não é possível mostrar as categorias");
 		}
+	}
+	
+	public Categoria fromDTO(CategoriaDTO categoriaDTO) {
+		return new Categoria(categoriaDTO.getId(),categoriaDTO.getNome());
 	}
 }
