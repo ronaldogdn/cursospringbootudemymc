@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ronaldo.curso.domain.Categoria;
 import com.ronaldo.curso.dto.CategoriaDTO;
@@ -32,6 +33,7 @@ public class CategoriaService {
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
 	}
 	
+	@Transactional
 	public Categoria insert(Categoria obj) {
 		//se não tem ID no objeto o JPA faz uma inserção nova
 		obj.setId(null);
@@ -94,4 +96,5 @@ public class CategoriaService {
 	public Categoria fromDTO(CategoriaDTO objDTO) {
 		return new Categoria(objDTO.getId(),objDTO.getNome());
 	}
+	
 }
