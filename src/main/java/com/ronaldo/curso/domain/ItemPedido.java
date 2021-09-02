@@ -22,12 +22,14 @@ public class ItemPedido implements Serializable{
 	public ItemPedido() {}
 
 	public ItemPedido(Pedido pedido, Produto produto, Double desconto, Integer quantidade, Double preco) {
-		super();
 		this.id.setPedido(pedido);
 		this.id.setProduto(produto);
 		this.desconto = desconto;
 		this.quantidade = quantidade;
 		this.preco = preco;
+	}
+	public double getSubTotal() {
+		return (this.preco - this.desconto) * this.quantidade;
 	}
 
 	@JsonIgnore
@@ -35,7 +37,7 @@ public class ItemPedido implements Serializable{
 		return id.getPedido();
 	}
 	
-	public Produto getPproduto() {
+	public Produto getProduto() {
 		return id.getProduto();
 	}
 	
