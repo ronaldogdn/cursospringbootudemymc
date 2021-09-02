@@ -9,6 +9,7 @@ import com.ronaldo.curso.domain.Cliente;
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Integer>{
 
+	//strping data doc para ver as posibilidades
 	@Transactional(readOnly = true)
 	Cliente findByEmail(String email);
 }
