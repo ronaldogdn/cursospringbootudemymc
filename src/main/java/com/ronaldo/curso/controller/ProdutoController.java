@@ -1,4 +1,4 @@
-package com.ronaldo.curso.resources;
+package com.ronaldo.curso.controller;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ import com.ronaldo.curso.services.ProdutoService;
  */
 @RestController
 @RequestMapping(value = "/produtos")
-public class ProdutoResouce {
+public class ProdutoController {
 	/**
 	 * Lembrar de sempre instanciar objetos Service
 	 */

@@ -1,4 +1,4 @@
-package com.ronaldo.curso.resources;
+package com.ronaldo.curso.controller;
 
 import java.net.URI;
 import java.util.List;
@@ -31,7 +31,7 @@ import com.ronaldo.curso.services.ClienteService;
  */
 @RestController
 @RequestMapping(value = "/clientes")
-public class ClienteResouce {
+public class ClienteController {
 	/**
 	 * Lembrar de sempre instanciar objetos Service
 	 */

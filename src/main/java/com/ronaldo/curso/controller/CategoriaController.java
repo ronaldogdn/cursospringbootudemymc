@@ -1,4 +1,4 @@
-package com.ronaldo.curso.resources;
+package com.ronaldo.curso.controller;
 
 import java.net.URI;
 import java.util.List;
@@ -25,12 +25,12 @@ import com.ronaldo.curso.dto.CategoriaDTO;
 import com.ronaldo.curso.services.CategoriaService;
 
 /**
- * Classe para fazer o Controller da api
+ * Classe para fazer o Controller da api via HTTP
  * @author ronaldo
  */
 @RestController
 @RequestMapping(value = "/categorias")
-public class CategoriaResouce {
+public class CategoriaController {
 	/**
 	 * Lembrar de sempre instanciar objetos Service
 	 */

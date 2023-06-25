@@ -1,4 +1,4 @@
-package com.ronaldo.curso.resources;
+package com.ronaldo.curso.controller;
 
 import java.net.URI;
 
@@ -23,7 +23,7 @@ import com.ronaldo.curso.services.PedidoService;
  */
 @RestController
 @RequestMapping(value = "/pedidos")
-public class PedidoResouce {
+public class PedidoController {
 	/**
 	 * Lembrar de sempre instanciar objetos Service
 	 */
