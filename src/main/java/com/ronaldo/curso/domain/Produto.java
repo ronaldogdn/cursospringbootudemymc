@@ -30,9 +30,9 @@ public class Produto implements Serializable {
 	@JsonIgnore//omite a busca de categoria para evitar a busca em loop
 	@ManyToMany//relação n:n com a lista de categorias
 	@JoinTable(
-				name = "PRODUTO_CATEGORIA", //Nome da Tabela n:n; tabela do meio; terceira tabela;
-				joinColumns = @JoinColumn(name = "produto_id"),//chave estrangeira do Produto
-				inverseJoinColumns = @JoinColumn(name = "categoria_id")//chave estrangeira da Categoria
+				name = "TB_PRODUTO_CATEGORIA", //Nome da Tabela n:n; tabela do meio; terceira tabela;
+				joinColumns = @JoinColumn(name = "fk_produto_id"),//chave estrangeira do Produto
+				inverseJoinColumns = @JoinColumn(name = "fk_categoria_id")//chave estrangeira da Categoria
 			  )
 	private List<Categoria> categorias = new ArrayList<Categoria>();
 	
