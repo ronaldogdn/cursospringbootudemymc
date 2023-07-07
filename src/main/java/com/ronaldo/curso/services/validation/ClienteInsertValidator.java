@@ -8,11 +8,11 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.ronaldo.curso.controller.exception.FieldMessage;
 import com.ronaldo.curso.domain.Cliente;
 import com.ronaldo.curso.domain.enums.TipoCliente;
 import com.ronaldo.curso.dto.ClienteNewDTO;
 import com.ronaldo.curso.repositories.ClienteRepository;
-import com.ronaldo.curso.resources.exception.FieldMessage;
 import com.ronaldo.curso.services.validation.utils.BR;
 
 public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, ClienteNewDTO> {

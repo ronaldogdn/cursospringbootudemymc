@@ -1,4 +1,4 @@
-package com.ronaldo.curso.resources.exception;
+package com.ronaldo.curso.controller.exception;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,7 +13,7 @@ import com.ronaldo.curso.services.exception.DataIntegrityException;
 import com.ronaldo.curso.services.exception.ObjectNotFoundException;
 
 @ControllerAdvice//tratamento global de erros
-public class ResourceExceptionHandler {
+public class ControllerExceptionHandler {
 
 	@ExceptionHandler(ObjectNotFoundException.class)
 	public ResponseEntity<StandartError> objectNotFound(ObjectNotFoundException exception, HttpServletRequest request){

@@ -11,10 +11,10 @@ import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerMapping;
 
+import com.ronaldo.curso.controller.exception.FieldMessage;
 import com.ronaldo.curso.domain.Cliente;
 import com.ronaldo.curso.dto.ClienteDTO;
 import com.ronaldo.curso.repositories.ClienteRepository;
-import com.ronaldo.curso.resources.exception.FieldMessage;
 
 public class ClienteUpdateValidator implements ConstraintValidator<ClienteUpdate, ClienteDTO> {
 	
