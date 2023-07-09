@@ -15,6 +15,12 @@ import com.ronaldo.curso.services.exception.ObjectNotFoundException;
 @ControllerAdvice//tratamento global de erros
 public class ControllerExceptionHandler {
 
+	/**
+	 * Tratamento padrão das exceções
+	 * @param exception
+	 * @param request
+	 * @return retorna o erro padrão encontrado
+	 */
 	@ExceptionHandler(ObjectNotFoundException.class)
 	public ResponseEntity<StandartError> objectNotFound(ObjectNotFoundException exception, HttpServletRequest request){
 		StandartError err = new StandartError(HttpStatus.NOT_FOUND.value(), exception.getMessage(), System.currentTimeMillis());
@@ -37,6 +43,5 @@ public class ControllerExceptionHandler {
 		}
 		
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
-	}
-	
+	}	
 }

@@ -25,9 +25,9 @@ public abstract class Pagamento implements Serializable{
 	private Integer estado;
 	
 	@JsonIgnore
-	@OneToOne
-	@JoinColumn(name = "pedido_id")
-	@MapsId
+	@OneToOne//1:1
+	@JoinColumn(name = "pedido_id")//fk de pedido que faz referência em Pagamento
+	@MapsId//garante que o ID de Pagamento seja o mesmo que o ID de Pedido
 	private Pedido pedido;	
 	
 	public Pagamento() {}
@@ -87,5 +87,4 @@ public abstract class Pagamento implements Serializable{
 			return false;
 		return true;
 	}
-
 }

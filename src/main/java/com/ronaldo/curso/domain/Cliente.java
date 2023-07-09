@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ronaldo.curso.domain.enums.TipoCliente;
 
 @Entity
@@ -32,11 +33,15 @@ public class Cliente  implements Serializable{
 	private String cpfOuCnpj;
 	private Integer tipo;
 	
-	//pode serializar os dados
+	@JsonManagedReference
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
 	private List<Endereco> enderecos = new ArrayList<>();
 	
-	//Set é um conjunto 
+	/**
+	 * Set é um conjunto que não pode repetir
+	 * A estrategia usada é de de criar uma lista de telefones e não uma tabela de telefones
+	 * poderia ser usada uma tabela somente para telefones
+	 */
 	@ElementCollection
 	@CollectionTable(name = "TELEFONE")
 	private Set<String> telefones = new HashSet<>();

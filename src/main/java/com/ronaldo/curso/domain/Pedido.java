@@ -28,7 +28,8 @@ public class Pedido implements Serializable{
 	private Date instante;
 	
 	//pode ser serializado
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
+	/*CascadeType.ALL: Corresponde a todas as operações (MERGE, PERSIST, REFRESH e REMOVE).*/
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")//mappedBy = "pedido" -> é a mesma var de Pedido pedido;
 	private Pagamento pagamento;
 	
 	
@@ -131,6 +132,4 @@ public class Pedido implements Serializable{
 			return false;
 		return true;
 	}
-
-		
 }
