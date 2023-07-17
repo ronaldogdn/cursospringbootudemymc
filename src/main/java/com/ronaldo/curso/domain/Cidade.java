@@ -2,14 +2,12 @@ package com.ronaldo.curso.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Cidade implements Serializable{
@@ -20,7 +18,7 @@ public class Cidade implements Serializable{
 	private Integer id;
 	private String nome;
 	
-	@JsonManagedReference//pode serializar os dados
+	//@JsonManagedReference//pode serializar os dados
 	@ManyToOne//na UML o lado que está n:1
 	// Na tabela cidade tem uma fk para Estado
 	@JoinColumn(name = "estado_id")
@@ -83,5 +81,4 @@ public class Cidade implements Serializable{
 			return false;
 		return true;
 	}
-
 }

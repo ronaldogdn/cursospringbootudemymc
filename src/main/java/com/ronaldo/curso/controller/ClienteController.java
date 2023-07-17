@@ -4,8 +4,6 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +22,8 @@ import com.ronaldo.curso.domain.Cliente;
 import com.ronaldo.curso.dto.ClienteDTO;
 import com.ronaldo.curso.dto.ClienteNewDTO;
 import com.ronaldo.curso.services.ClienteService;
+
+import jakarta.validation.Valid;
 
 /**
  * Classe para fazer o Controller da api

@@ -2,17 +2,20 @@ package com.ronaldo.curso.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.Embeddable;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 /**
  * Classe para gerar as chaves compostas
  */
-@Embeddable
+@Embeddable//faz classe ser um sub-tipo
 public class ItemPedidoPK implements Serializable{
+	//é necessário a serialização
 	private static final long serialVersionUID = 1L;
-	
+	/**
+	 * pedido e produto formam a chave composta entre a tabela Pedido e a tabela Produto
+	 */
 	@ManyToOne
 	@JoinColumn(name = "pedido_id")
 	private Pedido pedido;
@@ -66,5 +69,4 @@ public class ItemPedidoPK implements Serializable{
 			return false;
 		return true;
 	}
-
 }

@@ -6,17 +6,16 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Produto implements Serializable {
@@ -28,7 +27,7 @@ public class Produto implements Serializable {
 	private String nome;
 	private Double preco;
 	
-	@JsonBackReference//omite a busca de categoria para evitar a busca em loop
+	@JsonIgnore//omite a busca de categoria para evitar a busca em loop
 	@ManyToMany//relação n:n com a lista de categorias
 	@JoinTable(
 				name = "TB_PRODUTO_CATEGORIA", //Nome da Tabela n:n; tabela do meio; terceira tabela;
@@ -51,7 +50,7 @@ public class Produto implements Serializable {
 	}
 	/**
 	 * Um produto conhece os Pedidos dele
-	 * @return
+	 * @return lista de produtos
 	 */
 	@JsonIgnore
 	public List<Pedido> getPedidos() {
@@ -125,6 +124,5 @@ public class Produto implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
-	
+	}	
 }

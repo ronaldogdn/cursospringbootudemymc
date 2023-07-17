@@ -1,9 +1,9 @@
 package com.ronaldo.curso.domain;
 
-import javax.persistence.Entity;
-
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.ronaldo.curso.domain.enums.EstadoPagamento;
+
+import jakarta.persistence.Entity;
 
 @Entity
 @JsonTypeName("pagamentoComCartao")

@@ -1,7 +1,5 @@
 package com.ronaldo.curso.controller.exception;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -11,6 +9,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.ronaldo.curso.services.exception.DataIntegrityException;
 import com.ronaldo.curso.services.exception.ObjectNotFoundException;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @ControllerAdvice//tratamento global de erros
 public class ControllerExceptionHandler {

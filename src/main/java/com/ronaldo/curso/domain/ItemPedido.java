@@ -2,18 +2,18 @@ package com.ronaldo.curso.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
 
 @Entity
 public class ItemPedido implements Serializable{
 	private static final long serialVersionUID = 1L;
 
-	@JsonIgnore//não ser serializado
+	@JsonIgnore//ignora a serizalização
 	@EmbeddedId//ID embutido no tipo auxiliar ItemPedidoPK
-	private ItemPedidoPK id = new ItemPedidoPK();
+	private ItemPedidoPK id = new ItemPedidoPK();//chave composta
 	
 	private Double desconto;
 	private Integer quantidade;
@@ -109,7 +109,4 @@ public class ItemPedido implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-
 }

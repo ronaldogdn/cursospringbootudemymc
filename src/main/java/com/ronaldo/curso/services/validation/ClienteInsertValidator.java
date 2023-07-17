@@ -3,9 +3,6 @@ package com.ronaldo.curso.services.validation;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ronaldo.curso.controller.exception.FieldMessage;
@@ -14,6 +11,9 @@ import com.ronaldo.curso.domain.enums.TipoCliente;
 import com.ronaldo.curso.dto.ClienteNewDTO;
 import com.ronaldo.curso.repositories.ClienteRepository;
 import com.ronaldo.curso.services.validation.utils.BR;
+
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, ClienteNewDTO> {
 	
