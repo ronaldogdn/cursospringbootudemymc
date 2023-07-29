@@ -41,7 +41,7 @@ public class CategoriaService {
 	}
 	
 	public Categoria update(Categoria obj) {
-		//busca o cliente antigo para saber se o cliente existe
+		//busca no meu método find o cliente antigo para saber se o cliente existe
 		Categoria newObj = find(obj.getId());
 		//faz a atualização com os novos dados
 		updateDate(newObj, obj);
@@ -73,17 +73,6 @@ public class CategoriaService {
 	 * @return
 	 */
 	public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
-		boolean error = true;
-		if(page < 0 || linesPerPage < 0) {
-			throw new DataIntegrityException("não é possível mostrar as categorias");
-		}
-		if(orderBy.equals("id") || orderBy.equals("nome")) {
-			error = false;
-		}
-		
-		if(error) {
-			throw new DataIntegrityException("não é possível mostrar as categorias");
-		}
 		try {
 			//para spring versão 2 ou superior
 			PageRequest pageRequest = PageRequest.of(page,linesPerPage, Direction.valueOf(direction),orderBy);

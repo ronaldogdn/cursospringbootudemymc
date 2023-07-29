@@ -31,9 +31,7 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping(value = "/categorias")
 public class CategoriaController {
-	/**
-	 * Lembrar de sempre instanciar objetos Service
-	 */
+	
 	@Autowired
 	private CategoriaService service;
 	
@@ -50,7 +48,7 @@ public class CategoriaController {
 		obj = service.insert(obj);
 		/**
 		 * Ao inserir um novo dado é criado uma nova URI com um novo ID
-		 * fromCurrentRequest => pega a URI
+		 * fromCurrentRequest => pega a URL
 		 * path("/{id}") => acrescenta o ID na URI
 		 * buildAndExpand(obj.getId()) => pega o ID do objeto para colocar no path
 		 * .toUri() => converte para URI
@@ -76,7 +74,9 @@ public class CategoriaController {
 	
 	@GetMapping
 	public ResponseEntity<List<CategoriaDTO> > findAll() {
+		//recebe uma lista de Categorias
 		List<Categoria> list = service.findAll();
+		//transforma a lista de Categorias em uma lista de CategoriaDTO
 		List<CategoriaDTO> listDTO = list.stream().map(x -> new CategoriaDTO(x)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDTO);
 	}
@@ -92,6 +92,4 @@ public class CategoriaController {
 		Page<CategoriaDTO> listDTO = list.map(x -> new CategoriaDTO(x));
 		return ResponseEntity.ok().body(listDTO);
 	}
-	
-	
 }
