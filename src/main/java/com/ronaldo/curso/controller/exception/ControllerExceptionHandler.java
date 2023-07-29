@@ -35,9 +35,12 @@ public class ControllerExceptionHandler {
 	}
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public ResponseEntity<StandartError> dataIntegrity(MethodArgumentNotValidException exception, HttpServletRequest request){
+	public ResponseEntity<StandartError> argumentValidationException(MethodArgumentNotValidException exception, HttpServletRequest request){
 		ValidationError err = new ValidationError(HttpStatus.BAD_REQUEST.value(), "Erro de validação", System.currentTimeMillis());
-		
+		/**
+		 * @exception contém a lista de erros que aconteceram
+		 * o laço for percorre a lista e adiciona na lista de ValidationError
+		 */
 		for(FieldError x : exception.getBindingResult().getFieldErrors()) {
 			err.addError(x.getField(), x.getDefaultMessage());
 		}

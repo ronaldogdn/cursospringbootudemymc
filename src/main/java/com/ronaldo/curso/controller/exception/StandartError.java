@@ -37,6 +37,4 @@ public class StandartError implements Serializable{
 	public void setTimeStamp(Long timeStamp) {
 		TimeStamp = timeStamp;
 	}
-	
-	
 }
