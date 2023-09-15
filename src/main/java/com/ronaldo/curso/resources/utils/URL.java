@@ -14,6 +14,11 @@ public class URL {
 		for(int i = 0; i <s.length(); i++) {
 			list.add(Integer.parseInt(vet[i]));
 		}*/
+		/**
+		 * Quebra a lista com base na virgula
+		 * converte o caracter em inteiro
+		 * adiciona na lista e retorna
+		 */
 		return Arrays.asList(s.split(",")).stream().map(x -> Integer.parseInt(x)).collect(Collectors.toList());
 	}
 	/**
@@ -28,5 +33,4 @@ public class URL {
 			return "";
 		}
 	}
-
 }

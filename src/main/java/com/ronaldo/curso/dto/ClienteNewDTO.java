@@ -9,7 +9,7 @@ import com.ronaldo.curso.services.validation.ClienteInsert;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 
-@ClienteInsert
+@ClienteInsert//validação customizada
 public class ClienteNewDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 

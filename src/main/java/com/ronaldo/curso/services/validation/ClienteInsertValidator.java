@@ -15,6 +15,10 @@ import com.ronaldo.curso.services.validation.utils.BR;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
+/**
+ * ClienteInsert => é o @ClienteInsert da Classe
+ * ClienteNewDTO => é a Classe a ser validada
+ */
 public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, ClienteNewDTO> {
 	
 	@Autowired
@@ -39,7 +43,9 @@ public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert
 		if(aux != null) {
 			list.add(new FieldMessage("email","E-mail já existente"));
 		}
-		
+		/**
+		 * percorre a lista de mensagens de erros e adiciona no context padrão do framework
+		 */
 		for (FieldMessage e : list) {
 			context.disableDefaultConstraintViolation();
 			context.buildConstraintViolationWithTemplate(e.getMessage()).addPropertyNode(e.getFieldName())
