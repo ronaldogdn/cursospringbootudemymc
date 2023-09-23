@@ -35,7 +35,16 @@ public class ProdutoController {
 		
 		return ResponseEntity.ok().body(obj);
 	}
-	
+	/**
+	 * 
+	 * @param nome: nome ou parte do nome a ser procuradas
+	 * @param categorias: lista de IDs das categorias que serão buscadas
+	 * @param linesPerPage: quantidade linhas por páginas
+	 * @param orderBy ordenação da página: padrão é ordenada por nome
+	 * @param direction ASC ou DESC
+	 * @return retorna uma lista paginada
+	 * exemplo de busca: {{host}}/produtos/page?nome=or&categorias=1,4
+	 */
 	@GetMapping(value = "/page")
 	public ResponseEntity<Page<ProdutoDTO> > findPage(
 			@RequestParam(value = "nome", defaultValue ="") String nome,
@@ -44,8 +53,9 @@ public class ProdutoController {
 			@RequestParam(value = "linesPerPage", defaultValue ="24") Integer linesPerPage, 
 			@RequestParam(value = "orderBy", defaultValue ="nome") String orderBy, 
 			@RequestParam(value = "direction", defaultValue ="ASC") String direction){
-		
+		//faz o decoder do nome
 		String nomeDecoded = URL.decodeParam(nome);
+		//separa os IDs da categoria por virgula e cria a lista de inteiros
 		List<Integer> ids = URL.decodeIntList(categorias);
 		Page<Produto> list = service.search(nomeDecoded,ids,page,linesPerPage,orderBy,direction);
 		//Page já está no java 8

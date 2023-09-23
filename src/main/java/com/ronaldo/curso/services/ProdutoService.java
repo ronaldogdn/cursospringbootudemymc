@@ -32,7 +32,16 @@ public class ProdutoService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Produto.class.getName()));
 	}
-	
+	/**
+	 * 
+	 * @param nome: nome ou parte do nome a ser procurado
+	 * @param ids: lista de IDs para procurar nas categorias
+	 * @param page: numero das paginas
+	 * @param linesPerPage: quantidade linhas por páginas
+	 * @param orderBy ordenação da página: padrão é ordenada por nome
+	 * @param direction ASC ou DESC
+	 * @return retorna uma lista de Páginas
+	 */
 	public Page<Produto> search(String nome, List<Integer> ids,Integer page, Integer linesPerPage, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page,linesPerPage, Direction.valueOf(direction),orderBy);
 		List<Categoria> categorias = categoriaRepository.findAllById(ids);
