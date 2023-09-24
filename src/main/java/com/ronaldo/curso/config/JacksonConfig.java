@@ -15,6 +15,9 @@ public class JacksonConfig {
 	public Jackson2ObjectMapperBuilder objectMapperBuilder() {
 		Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder() {
 			public void configure(ObjectMapper objectMapper) {
+				/**
+				 * PagamentoComCartao e PagamentoComBoleto são as subclasses da classe Pagamento
+				 */
 				objectMapper.registerSubtypes(PagamentoComCartao.class);
 				objectMapper.registerSubtypes(PagamentoComBoleto.class);
 				super.configure(objectMapper);

@@ -13,8 +13,7 @@ public class BoletoService {
 	public void preencherPagamentoComBoleto(PagamentoComBoleto pagto, Date instanteDoPedido) {
 		/**
 		 * Cria um data de pagamento fake
-		 * Em situação real teria que trocar por um web service de pagamento
-		 * de boleto
+		 * Em situação real teria que trocar por um web service de pagamento de boleto
 		 */
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(instanteDoPedido);

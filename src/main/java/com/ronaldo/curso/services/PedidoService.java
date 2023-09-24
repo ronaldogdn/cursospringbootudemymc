@@ -20,7 +20,7 @@ import com.ronaldo.curso.services.exception.ObjectNotFoundException;
 public class PedidoService {
 
 	@Autowired
-	private PedidoRepository repo;
+	private PedidoRepository repository;
 	@Autowired
 	private BoletoService boletoService;
 	@Autowired
@@ -34,9 +34,9 @@ public class PedidoService {
 	public Pedido find(Integer id) {
 		/**
 		 * Atualização do JPA para o java 8+
-		 * O Optiona retornal o Objeto ou nulo que deve ser tratado
+		 * O Optional retorna o Objeto ou nulo que deve ser tratado
 		 */
-		Optional<Pedido> obj = repo.findById(id);
+		Optional<Pedido> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Pedido.class.getName()));
 	}
@@ -45,14 +45,19 @@ public class PedidoService {
 	public Pedido insert(Pedido obj) {
 		obj.setId(null);
 		obj.setInstante(new Date());
+		//todo pedido novo tem o pagamneot como pendente
 		obj.getPagamento().setEstado(EstadoPagamento.PENDENTE);
 		obj.getPagamento().setPedido(obj);
+		/**
+		 * No mundo real teria um gateway de pagamento para o boleto
+		 */
 		if(obj.getPagamento() instanceof PagamentoComBoleto) {
 			//Pagamento é a uma classe abstract por isso a conversão de tipo
 			PagamentoComBoleto pagto = (PagamentoComBoleto) obj.getPagamento();
+			//a data de pagamento é simulada com uma semana depois de gerar o pedido
 			boletoService.preencherPagamentoComBoleto(pagto, obj.getInstante());
 		}
-		obj = repo.save(obj);
+		obj = repository.save(obj);
 		pagamentoRepository.save(obj.getPagamento());
 		for (ItemPedido ip : obj.getItens()) {
 			ip.setDesconto(0.0);
