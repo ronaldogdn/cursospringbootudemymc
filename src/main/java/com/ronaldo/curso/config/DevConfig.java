@@ -17,12 +17,15 @@ public class DevConfig {
 	@Autowired
 	private DBService dbService;
 	
-	//tipo de chave => none, create, update
+	/**
+	 * tipo de chave => none, create, update
+	 * detecta se é none, create, update no arquivo application-dev para o mysql
+	 */	
 	@Value("$(spring.jpa.hibernate.ddl-auto)")
 	private String strategy;
 	
 	@Bean
-	public boolean instantiateDatabase() throws ParseException {
+	boolean instantiateDatabase() throws ParseException {
 		dbService.instantiateTestDatabase();
 		if(!"create".equals(strategy)) {
 			return false;
