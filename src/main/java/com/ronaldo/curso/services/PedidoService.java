@@ -11,6 +11,7 @@ import com.ronaldo.curso.domain.ItemPedido;
 import com.ronaldo.curso.domain.PagamentoComBoleto;
 import com.ronaldo.curso.domain.Pedido;
 import com.ronaldo.curso.domain.enums.EstadoPagamento;
+import com.ronaldo.curso.repositories.ClienteRepository;
 import com.ronaldo.curso.repositories.ItemPedidoRepository;
 import com.ronaldo.curso.repositories.PagamentoRepository;
 import com.ronaldo.curso.repositories.PedidoRepository;
@@ -29,7 +30,8 @@ public class PedidoService {
 	private ProdutoService produtoService ;
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
-	
+	@Autowired
+	private ClienteRepository clienteRepository;
 	
 	public Pedido find(Integer id) {
 		/**
@@ -45,6 +47,7 @@ public class PedidoService {
 	public Pedido insert(Pedido obj) {
 		obj.setId(null);
 		obj.setInstante(new Date());
+		obj.setCliente(clienteRepository.findById(obj.getCliente().getId()).orElse(null));
 		//todo pedido novo tem o pagamneot como pendente
 		obj.getPagamento().setEstado(EstadoPagamento.PENDENTE);
 		obj.getPagamento().setPedido(obj);
@@ -61,7 +64,8 @@ public class PedidoService {
 		pagamentoRepository.save(obj.getPagamento());
 		for (ItemPedido ip : obj.getItens()) {
 			ip.setDesconto(0.0);
-			ip.setPreco(produtoService.find(ip.getProduto().getId()).getPreco());
+			ip.setProduto(produtoService.find(ip.getProduto().getId()));
+			ip.setPreco(ip.getProduto().getPreco());
 			ip.setPedido(obj);
 		}
 		itemPedidoRepository.saveAll(obj.getItens());
