@@ -47,12 +47,12 @@ public class ProdutoController {
 	 */
 	@GetMapping(value = "/page")
 	public ResponseEntity<Page<ProdutoDTO> > findPage(
-			@RequestParam(value = "nome", defaultValue ="") String nome,
-			@RequestParam(value = "categorias", defaultValue="") String categorias, 
-			@RequestParam(value = "page", defaultValue ="0") Integer page,
-			@RequestParam(value = "linesPerPage", defaultValue ="24") Integer linesPerPage, 
-			@RequestParam(value = "orderBy", defaultValue ="nome") String orderBy, 
-			@RequestParam(value = "direction", defaultValue ="ASC") String direction){
+			@RequestParam(defaultValue ="") String nome,
+			@RequestParam(defaultValue="") String categorias, 
+			@RequestParam(defaultValue ="0") Integer page,
+			@RequestParam(defaultValue ="24") Integer linesPerPage, 
+			@RequestParam(defaultValue ="nome") String orderBy, 
+			@RequestParam(defaultValue ="ASC") String direction){
 		//faz o decoder do nome
 		String nomeDecoded = URL.decodeParam(nome);
 		//separa os IDs da categoria por virgula e cria a lista de inteiros

@@ -12,6 +12,8 @@ import com.ronaldo.curso.services.DBService;
  * Arquivo responsável pelo profile de Test
  * Os dados automáticos estão na Classe DBService
  */
+import com.ronaldo.curso.services.EmailService;
+import com.ronaldo.curso.services.MockEmailService;
 @Configuration
 @Profile("test")
 public class TestConfig {
@@ -21,8 +23,12 @@ public class TestConfig {
 
     @Bean
     boolean instantiateDatabase() throws ParseException {
-		dbService.instantiateTestDatabase();
-		
+		dbService.instantiateTestDatabase();		
 		return true;
 	}
+    
+    @Bean
+    EmailService emailService() {
+    	return new MockEmailService();
+    }
 }

@@ -68,10 +68,10 @@ public class ClienteController {
 	
 	@GetMapping(value = "/page")
 	public ResponseEntity<Page<ClienteDTO> > findPage(
-												@RequestParam(value = "page", defaultValue ="0") Integer page,
-												@RequestParam(value = "linesPerPage", defaultValue ="24") Integer linesPerPage, 
-												@RequestParam(value = "orderBy", defaultValue ="nome") String orderBy, 
-												@RequestParam(value = "direction", defaultValue ="ASC") String direction){
+												@RequestParam(defaultValue ="0") Integer page,
+												@RequestParam(defaultValue ="24") Integer linesPerPage, 
+												@RequestParam(defaultValue ="nome") String orderBy, 
+												@RequestParam(defaultValue ="ASC") String direction){
 		Page<Cliente> list = service.findPage(page,linesPerPage,orderBy,direction);
 		//Page já está no java 8
 		Page<ClienteDTO> listDTO = list.map(x -> new ClienteDTO(x));

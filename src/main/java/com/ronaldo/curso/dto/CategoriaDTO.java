@@ -1,3 +1,4 @@
+
 package com.ronaldo.curso.dto;
 
 import java.io.Serializable;
