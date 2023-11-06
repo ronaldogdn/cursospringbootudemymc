@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,7 +23,7 @@ public class Estado implements Serializable{
 	private String nome;
 	
 	@JsonIgnore//dados não serializados; evita a serialização cíclica
-	@OneToMany(mappedBy = "estado")
+	@OneToMany(mappedBy = "estado", cascade = CascadeType.MERGE)
 	private List<Cidade> cidades = new ArrayList<>();
 	
 	public Estado() {}

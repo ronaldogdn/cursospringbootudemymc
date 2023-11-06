@@ -92,16 +92,25 @@ public class DBService {
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 
-		Cliente cli1 = new Cliente(null, "Ronaldo Gomes do Nascimento", "ronaldogdn@gmail.com", "123456712345", TipoCliente.PESSOAFISICA);
+		Cliente cli1 = new Cliente(null, "Ronaldo Gomes do Nascimento", "ronaldogdn@gmail.com", "02351028066", TipoCliente.PESSOAFISICA);
 		cli1.getTelefones().addAll(Arrays.asList("328812345", "981144792"));
+		cli1.addPerfil(Perfil.ADMIN);
+		
+		Cliente cli2 = new Cliente(null, "Rosane Gomes do Nascimento", "rosanegdn@gmail.com", "62329645007", TipoCliente.PESSOAFISICA);
+		cli2.getTelefones().addAll(Arrays.asList("328812345", "981144792"));
+		cli2.addPerfil(Perfil.CLIENTE);
 
 		Endereco e1 = new Endereco(null, "Rua A", "300", "Apto 303", "jardim", "12345678941", cli1, c1);
 
-		Endereco e2 = new Endereco(null, "Rua B", "100", "Sala 803", "Centro", "99345678941", cli1, c2);
+		Endereco e2 = new Endereco(null, "Rua B", "100", "Sala 803", "Centro", "99345678941", cli2, c2);
 
 		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
-
-		clienteRepository.saveAll(Arrays.asList(cli1));
+		cli2.getEnderecos().addAll(Arrays.asList(e2));
+		
+		if(clienteRepository.findByEmail(cli1.getEmail()) != null)  {
+			return;
+		}
+		clienteRepository.saveAll(Arrays.asList(cli1,cli2));
 		enderecoRepository.saveAll(Arrays.asList(e1, e2));
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");

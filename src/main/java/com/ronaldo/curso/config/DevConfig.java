@@ -23,7 +23,7 @@ public class DevConfig {
 	 * tipo de chave => none, create, update
 	 * detecta se é none, create, update no arquivo application-dev para o mysql
 	 */	
-	@Value("$(spring.jpa.hibernate.ddl-auto)")
+	@Value("$(spring.jpa.hibernate.ddl-auto=update)")
 	private String strategy;
 	
 	@Bean
