@@ -24,6 +24,7 @@ public class Credentials implements UserDetails{
 	private String login;
 	private String password;
 	private Perfil role;
+	//private Collection<? extends GrantedAuthority> authoritiesPerfis;
 	
 	public Credentials() {
 	}
@@ -32,6 +33,7 @@ public class Credentials implements UserDetails{
 		this.login = login;
 		this.password = password;
 		this.role = role;
+		//this.authoritiesPerfis = getAuthorities();
 	}
 
 	public Integer getId() {
@@ -58,13 +60,17 @@ public class Credentials implements UserDetails{
 		this.password = password;
 	}
 
+	public Perfil getRole() {
+		return role;
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		if(this.role == Perfil.ADMIN) {
-			return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"),
-						   new SimpleGrantedAuthority("ROLE_CLIENTE"));
+			return List.of(new SimpleGrantedAuthority("ADMIN"),
+					new SimpleGrantedAuthority("CLIENTE"));
 		}
-		return List.of(new SimpleGrantedAuthority("ROLE_CLIENTE"));
+		return List.of(new SimpleGrantedAuthority("CLIENTE"));
 	}
 
 	@Override
@@ -90,5 +96,13 @@ public class Credentials implements UserDetails{
 	@Override
 	public boolean isEnabled() {
 		return true;
-	}		
+	}
+
+	/*public Collection<? extends GrantedAuthority> getAuthoritiesPerfis() {
+		return authoritiesPerfis;
+	}*/
+	
+	public boolean hasRole(Perfil perfil) {
+		return getAuthorities().contains(new SimpleGrantedAuthority(perfil.getDescricao()));
+	}
 }

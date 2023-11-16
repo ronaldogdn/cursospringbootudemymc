@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,7 +21,7 @@ public class Categoria implements Serializable {
 	private String nome;
 	
 	//@JsonManagedReference -> trocado no lado BackReference para @JsonIgnore
-	@ManyToMany(mappedBy = "categorias")
+	@ManyToMany(mappedBy = "categorias",cascade = CascadeType.MERGE)
 	List<Produto> produtos = new ArrayList<Produto>();
 	
 	public Categoria() {

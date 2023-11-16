@@ -32,19 +32,19 @@ public class Pedido implements Serializable{
 	
 	//@JsonManagedReference//pode ser serializado
 	/*CascadeType.ALL: Corresponde a todas as operações (MERGE, PERSIST, REFRESH e REMOVE).*/
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")//mappedBy = "pedido" -> é a mesma var de Pedido pedido;
+	@OneToOne(cascade = CascadeType.MERGE, mappedBy = "pedido")//mappedBy = "pedido" -> é a mesma var de Pedido pedido;
 	private Pagamento pagamento;
 	
 	//@JsonManagedReference
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "endereco_de_entrega_id")
 	private Endereco enderecoDeEntrega;
 	
-	@OneToMany(mappedBy = "id.pedido")
+	@OneToMany(mappedBy = "id.pedido",cascade = CascadeType.MERGE)
 	private Set<ItemPedido> itens = new HashSet<>();
 	
 	public Pedido() {}

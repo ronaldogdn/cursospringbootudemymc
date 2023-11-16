@@ -8,6 +8,7 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,7 +29,7 @@ public class Produto implements Serializable {
 	private Double preco;
 	
 	@JsonIgnore//omite a busca de categoria para evitar a busca em loop
-	@ManyToMany//relação n:n com a lista de categorias
+	@ManyToMany(cascade = CascadeType.MERGE)//relação n:n com a lista de categorias
 	@JoinTable(
 				name = "TB_PRODUTO_CATEGORIA", //Nome da Tabela n:n; tabela do meio; terceira tabela;
 				joinColumns = @JoinColumn(name = "fk_produto_id"),//chave estrangeira do Produto
@@ -37,7 +38,7 @@ public class Produto implements Serializable {
 	private List<Categoria> categorias = new ArrayList<Categoria>();
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "id.produto")
+	@OneToMany(mappedBy = "id.produto",cascade = CascadeType.MERGE)
 	private Set<ItemPedido> itens = new HashSet<>();
 	
 	public Produto() {}

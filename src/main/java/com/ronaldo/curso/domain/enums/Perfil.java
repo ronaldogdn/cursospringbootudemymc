@@ -2,8 +2,8 @@ package com.ronaldo.curso.domain.enums;
 
 public enum Perfil {
 
-	ADMIN(1,"ROLE_ADMIN"),
-	CLIENTE(2,"ROLE_CLIENTE");
+	ADMIN(1,"ADMIN"),
+	CLIENTE(2,"CLIENTE");
 	
 	private int codigo;
 	private String descricao;

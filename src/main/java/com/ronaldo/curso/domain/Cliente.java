@@ -36,7 +36,7 @@ public class Cliente  implements Serializable{
 	private Integer tipo;
 	
 	//@JsonManagedReference
-	@OneToMany(mappedBy = "cliente", cascade = CascadeType.MERGE, orphanRemoval = true)
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.MERGE)
 	private List<Endereco> enderecos = new ArrayList<>();
 	
 	/**
@@ -53,7 +53,7 @@ public class Cliente  implements Serializable{
 	private Set<Integer> perfis = new HashSet<>();
 	
 	@JsonIgnore//não serializa os dados
-	@OneToMany(mappedBy = "cliente")
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.MERGE)
 	private List<Pedido> pedidos = new ArrayList<>();
 	
 	public Cliente() {

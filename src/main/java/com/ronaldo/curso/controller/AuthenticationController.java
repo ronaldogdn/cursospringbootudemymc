@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ronaldo.curso.domain.Credentials;
-import com.ronaldo.curso.domain.enums.Perfil;
 import com.ronaldo.curso.dto.AuthenticationDTO;
 import com.ronaldo.curso.dto.LoginResponseDTO;
+import com.ronaldo.curso.dto.RegisterDTO;
 import com.ronaldo.curso.repositories.CredentialsRepository;
 import com.ronaldo.curso.services.TokenService;
 
@@ -35,27 +35,21 @@ public class AuthenticationController {
 		
 		var auth = this.authenticationManager.authenticate(userNamePassword);
 		var token = tokenService.generateToken((Credentials)auth.getPrincipal());
-		//var token = (Credentials)auth.getPrincipal();
-		
 		return ResponseEntity.ok(new LoginResponseDTO(token));
 	}
 	
 	@PostMapping("/register")
-	//public ResponseEntity<Void> register(@Valid @RequestBody Credentials registerDTO){
-		public ResponseEntity<Credentials> register(@Valid @RequestBody Credentials registerDTO){	
+	public ResponseEntity<String> register(@Valid @RequestBody RegisterDTO registerDTO){	
 		if(this.credentialsRepository.findByLogin(registerDTO.getLogin()) != null)
 		{
-			return ResponseEntity.badRequest().build();
+			return ResponseEntity.badRequest().body("email já cadastrado");
 	    }
-		//RegisterDTO register = new RegisterDTO(login,password,role); 
-		
 		
 		String encryptedPassword = new BCryptPasswordEncoder().encode(registerDTO.getPassword());
-		Credentials newUser = new Credentials(registerDTO.getLogin(), encryptedPassword, Perfil.ADMIN);
 		
+		Credentials newUser = new Credentials(registerDTO.getLogin(), encryptedPassword, registerDTO.getRole());
 		
-		this.credentialsRepository.save(newUser);		
-		//return ResponseEntity.ok().build();
-		return ResponseEntity.status(201).body(newUser);
+		this.credentialsRepository.save(newUser);	
+		return ResponseEntity.status(201).body("User created");
 	}
 }

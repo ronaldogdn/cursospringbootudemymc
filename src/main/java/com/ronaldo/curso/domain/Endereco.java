@@ -26,10 +26,11 @@ public class Endereco implements Serializable{
 	private String cep;
 	
 	@JsonIgnore//não pode serializar os dados
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 	
+	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "cidade_id")
 	private Cidade cidade;

@@ -30,8 +30,7 @@ public class SecurityConfig {
 							.requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
 							.requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
 							.requestMatchers(HttpMethod.GET, "/categorias").permitAll()
-	                        //.requestMatchers(HttpMethod.POST, "/auth/register").hasRole("ADMIN")
-	                        //.requestMatchers(HttpMethod.POST, "/product").hasRole("ADMIN")
+	                        .requestMatchers(HttpMethod.POST, "/clientes").hasRole("ADMIN")
 	                        .anyRequest().authenticated()//todas as demais precisam autenticar
 	                )
 					.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

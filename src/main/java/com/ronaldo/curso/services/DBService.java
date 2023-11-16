@@ -11,6 +11,8 @@ import com.ronaldo.curso.domain.*;
 import com.ronaldo.curso.domain.enums.*;
 import com.ronaldo.curso.repositories.*;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class DBService {
 
@@ -33,6 +35,7 @@ public class DBService {
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
 
+	@Transactional
 	public void instantiateTestDatabase() throws ParseException {
 		
 		Categoria cat1 = new Categoria(null, "Informática");
@@ -99,6 +102,10 @@ public class DBService {
 		Cliente cli2 = new Cliente(null, "Rosane Gomes do Nascimento", "rosanegdn@gmail.com", "62329645007", TipoCliente.PESSOAFISICA);
 		cli2.getTelefones().addAll(Arrays.asList("328812345", "981144792"));
 		cli2.addPerfil(Perfil.CLIENTE);
+		
+		Cliente cli3 = new Cliente(null, "Rodrigo Gomes do Nascimento", "rodrigogdn@gmail.com", "62329645007", TipoCliente.PESSOAFISICA);
+		cli3.getTelefones().addAll(Arrays.asList("328812345", "981144792"));
+		cli3.addPerfil(Perfil.CLIENTE);
 
 		Endereco e1 = new Endereco(null, "Rua A", "300", "Apto 303", "jardim", "12345678941", cli1, c1);
 
@@ -106,13 +113,14 @@ public class DBService {
 
 		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
 		cli2.getEnderecos().addAll(Arrays.asList(e2));
+		cli3.getEnderecos().addAll(Arrays.asList(e2));
 		
 		if(clienteRepository.findByEmail(cli1.getEmail()) != null)  {
 			return;
 		}
-		clienteRepository.saveAll(Arrays.asList(cli1,cli2));
+		clienteRepository.saveAll(Arrays.asList(cli1,cli2,cli3));
 		enderecoRepository.saveAll(Arrays.asList(e1, e2));
-
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		Pedido pedido1 = new Pedido(null, sdf.parse("30/09/2017 10:32"), cli1, e1);
 		Pedido pedido2 = new Pedido(null, sdf.parse("10/10/2017 19:35"), cli1, e2);

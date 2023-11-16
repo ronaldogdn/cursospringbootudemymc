@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,7 +21,7 @@ public class Cidade implements Serializable{
 	private String nome;
 	
 	//@JsonManagedReference//pode serializar os dados
-	@ManyToOne(cascade = CascadeType.MERGE)//na UML o lado que está n:1
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)//na UML o lado que está n:1
 	// Na tabela cidade tem uma fk para Estado
 	@JoinColumn(name = "estado_id")
 	private Estado estado;

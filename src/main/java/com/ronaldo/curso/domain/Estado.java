@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,7 +24,7 @@ public class Estado implements Serializable{
 	private String nome;
 	
 	@JsonIgnore//dados não serializados; evita a serialização cíclica
-	@OneToMany(mappedBy = "estado", cascade = CascadeType.MERGE)
+	@OneToMany(mappedBy = "estado", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Cidade> cidades = new ArrayList<>();
 	
 	public Estado() {}

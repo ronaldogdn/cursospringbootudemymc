@@ -12,24 +12,19 @@ public class RegisterDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@NotEmpty(message = "Preenchimento obrigatório")
-	@Length(min = 5,max = 20,message = "O tamanho deve ser entre 5 e 20 caracteres")
+	@Length(min = 5,max = 40,message = "O tamanho deve ser entre 5 e 40 caracteres")
 	private String login; 
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String password;
 	
 	private Perfil role;
 		
-	/*public RegisterDTO(String login,String password,String role) {
-		this.login = login;
-		this.password = password;
-		this.role = role.equals("admin") ? Perfil.ADMIN : Perfil.CLIENTE;
-	}*/
 	public RegisterDTO() {}
 	
 	public RegisterDTO(RegisterDTO credentials) {
 		this.login = credentials.getLogin();
 		this.password = credentials.getPassword();
-		this.role = Perfil.ADMIN;
+		this.role = credentials.getRole();
 	}
 	
 	public String getLogin() {
