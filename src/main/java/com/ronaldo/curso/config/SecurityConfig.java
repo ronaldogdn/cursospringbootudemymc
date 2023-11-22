@@ -23,18 +23,22 @@ public class SecurityConfig {
 	
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-		return httpSecurity
+		
+		  return httpSecurity
 					.csrf(csrf -> csrf.disable())
 					.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 					.authorizeHttpRequests(authorize -> authorize
 							.requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
 							.requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
+							.requestMatchers(HttpMethod.POST, "/auth/refresh-token").permitAll()//.hasRole("ADMIN")
 							.requestMatchers(HttpMethod.GET, "/categorias").permitAll()
-	                        .requestMatchers(HttpMethod.POST, "/clientes").hasRole("ADMIN")
+							.requestMatchers(HttpMethod.GET, "/pedidos").hasRole("CLIENTE")
+	                        .requestMatchers(HttpMethod.POST, "/clientes").hasRole("CLIENTE")
 	                        .anyRequest().authenticated()//todas as demais precisam autenticar
 	                )
 					.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
 					.build();
+		
 	}
 	
 	@Bean

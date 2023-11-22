@@ -5,11 +5,34 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.ronaldo.curso.domain.*;
-import com.ronaldo.curso.domain.enums.*;
-import com.ronaldo.curso.repositories.*;
+import com.ronaldo.curso.domain.Categoria;
+import com.ronaldo.curso.domain.Cidade;
+import com.ronaldo.curso.domain.Cliente;
+import com.ronaldo.curso.domain.Credentials;
+import com.ronaldo.curso.domain.Endereco;
+import com.ronaldo.curso.domain.Estado;
+import com.ronaldo.curso.domain.ItemPedido;
+import com.ronaldo.curso.domain.Pagamento;
+import com.ronaldo.curso.domain.PagamentoComBoleto;
+import com.ronaldo.curso.domain.PagamentoComCartao;
+import com.ronaldo.curso.domain.Pedido;
+import com.ronaldo.curso.domain.Produto;
+import com.ronaldo.curso.domain.enums.EstadoPagamento;
+import com.ronaldo.curso.domain.enums.Perfil;
+import com.ronaldo.curso.domain.enums.TipoCliente;
+import com.ronaldo.curso.repositories.CategoriaRepository;
+import com.ronaldo.curso.repositories.CidadeRepository;
+import com.ronaldo.curso.repositories.ClienteRepository;
+import com.ronaldo.curso.repositories.CredentialsRepository;
+import com.ronaldo.curso.repositories.EnderecoRepository;
+import com.ronaldo.curso.repositories.EstadoRepository;
+import com.ronaldo.curso.repositories.ItemPedidoRepository;
+import com.ronaldo.curso.repositories.PagamentoRepository;
+import com.ronaldo.curso.repositories.PedidoRepository;
+import com.ronaldo.curso.repositories.ProdutoRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -34,6 +57,8 @@ public class DBService {
 	private PedidoRepository pedidoRepository;
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
+	@Autowired
+	private CredentialsRepository credentialsRepository;
 
 	@Transactional
 	public void instantiateTestDatabase() throws ParseException {
@@ -120,6 +145,21 @@ public class DBService {
 		}
 		clienteRepository.saveAll(Arrays.asList(cli1,cli2,cli3));
 		enderecoRepository.saveAll(Arrays.asList(e1, e2));
+		
+		Credentials credential1 = new Credentials("ronaldogdn@gmail.com","123456",Perfil.ADMIN);
+		Credentials credential2 = new Credentials("rosanegdn@gmail.com","123456",Perfil.CLIENTE);
+		Credentials credential3 = new Credentials("rodrigogdn@gmail.com","123456",Perfil.CLIENTE);
+		
+		String encryptedPassword = new BCryptPasswordEncoder().encode(credential1.getPassword());
+		credential1.setPassword(encryptedPassword);
+		
+		encryptedPassword = new BCryptPasswordEncoder().encode(credential2.getPassword());
+		credential2.setPassword(encryptedPassword);
+		
+		encryptedPassword = new BCryptPasswordEncoder().encode(credential3.getPassword());
+		credential3.setPassword(encryptedPassword);		
+		
+		credentialsRepository.saveAll(Arrays.asList(credential1,credential2,credential3));
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		Pedido pedido1 = new Pedido(null, sdf.parse("30/09/2017 10:32"), cli1, e1);

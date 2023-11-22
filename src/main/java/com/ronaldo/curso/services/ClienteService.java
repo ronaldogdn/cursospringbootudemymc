@@ -35,6 +35,9 @@ public class ClienteService {
 	
 	public Cliente find(Integer id) {	
 		Credentials user = UserService.authenticated();
+		if(user == null) {
+			throw new AuthorizationException("Acesso negado");
+		}
 		Optional<Cliente> obj = repo.findById(id);
 		boolean userCredential = user.getLogin().equals(obj.get().getEmail());
 		

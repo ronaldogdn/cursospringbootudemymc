@@ -33,7 +33,6 @@ public class Credentials implements UserDetails{
 		this.login = login;
 		this.password = password;
 		this.role = role;
-		//this.authoritiesPerfis = getAuthorities();
 	}
 
 	public Integer getId() {
