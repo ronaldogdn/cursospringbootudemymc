@@ -30,10 +30,10 @@ public class SecurityConfig {
 					.authorizeHttpRequests(authorize -> authorize
 							.requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
 							.requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
-							.requestMatchers(HttpMethod.POST, "/auth/refresh-token").permitAll()//.hasRole("ADMIN")
+							.requestMatchers(HttpMethod.POST, "/auth/refresh-token").hasAuthority("CLIENTE")
 							.requestMatchers(HttpMethod.GET, "/categorias").permitAll()
-							.requestMatchers(HttpMethod.GET, "/pedidos").hasRole("CLIENTE")
-	                        .requestMatchers(HttpMethod.POST, "/clientes").hasRole("CLIENTE")
+							.requestMatchers(HttpMethod.GET, "/pedidos").hasAuthority("ROLE_CLIENTE")
+	                        //.requestMatchers(HttpMethod.POST, "/clientes").hasRole("ROLE_CLIENTE")
 	                        .anyRequest().authenticated()//todas as demais precisam autenticar
 	                )
 					.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
