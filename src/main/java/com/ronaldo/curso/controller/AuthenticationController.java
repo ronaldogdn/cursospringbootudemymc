@@ -65,6 +65,7 @@ public class AuthenticationController {
 		var token = tokenService.generateToken(user);
 		//add no cabecalho header
 		response.addHeader("Authorization", token);
+		response.addHeader("access-control-expose-headers", "Authorization");
 		return ResponseEntity.ok().body(token);
 
 	}
