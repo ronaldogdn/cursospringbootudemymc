@@ -32,9 +32,7 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping(value = "/clientes")
 public class ClienteController {
-	/**
-	 * Lembrar de sempre instanciar objetos Service
-	 */
+	
 	@Autowired
 	private ClienteService service;
 	
@@ -44,6 +42,15 @@ public class ClienteController {
 		
 		return ResponseEntity.ok().body(categoria);
 	}
+	
+	@GetMapping(value = "/email")
+	public ResponseEntity<Cliente> find(@RequestParam(value = "value") String email) {
+		Cliente obj = service.findByEmail(email);
+		
+		return ResponseEntity.ok().body(obj);
+	}
+	
+	
 	
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO objDTO, @PathVariable Integer id){
