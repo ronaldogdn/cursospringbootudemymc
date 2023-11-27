@@ -54,6 +54,6 @@ public class ControllerExceptionHandler {
 			err.addError(x.getField(), x.getDefaultMessage());
 		}
 		
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(err);
 	}	
 }
