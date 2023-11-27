@@ -30,6 +30,7 @@ public class SecurityConfig {
 					.authorizeHttpRequests(authorize -> authorize
 							.requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
 							.requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
+							.requestMatchers(HttpMethod.GET, "/estados/**").permitAll()
 							.requestMatchers(HttpMethod.POST, "/auth/refresh-token").hasAuthority("CLIENTE")
 							.requestMatchers(HttpMethod.GET, "/categorias").permitAll()
 							.requestMatchers(HttpMethod.GET, "/pedidos").hasAuthority("ROLE_CLIENTE")
